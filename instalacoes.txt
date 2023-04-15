@@ -10,3 +10,5 @@ npm run mix
 migrations
 php artisan make:migration create_series_table
 php artisan migrate
+
+php artisan make:model Serie

@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Serie;
 
 class SeriesController extends Controller
 {
     public function index()
     {
-        $series = DB::select('SELECT nome FROM series;');
+        //$series = Serie::all();
+        $series = Serie::query()->orderBy('nome')->get();
+
+        //$series = DB::select('SELECT nome FROM series;');
         /* $series = [
             'Punisher',
             'Lost',
@@ -34,11 +38,12 @@ class SeriesController extends Controller
     {
         $nomeSerie = $request->input('nome');
         
-        if (DB::insert('INSERT INTO series (nome) values (?)', [$nomeSerie])) {
-            return "OK";
-        } else {
-            return "Deu erro";
-        }
+        $serie = new Serie();
+        $serie->nome = $nomeSerie;
+        $serie->save();
+        
+        //DB::insert('INSERT INTO series (nome) values (?)', [$nomeSerie]);
+        return redirect('/series');
 
     }
 }
