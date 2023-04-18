@@ -45,7 +45,9 @@ class SeriesController extends Controller
         Serie::create($request->all());
         
         //DB::insert('INSERT INTO series (nome) values (?)', [$nomeSerie]);
-        return redirect('/series');
+        //return redirect('/series');
+        return redirect()->route('series.index');
+        //return to_route('series.index');
 
     }
 }
