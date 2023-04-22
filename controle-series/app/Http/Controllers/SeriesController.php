@@ -46,21 +46,23 @@ class SeriesController extends Controller
 
         $serie = Serie::create($request->all());
         //session(['mensagem.sucesso' => 'Série adicionada com sucesso']);
-        $request->session()->flash('mensagem.sucesso', "Série '{$serie->nome}' adicionada com sucesso");
+        //$request->session()->flash('mensagem.sucesso', "Série '{$serie->nome}' adicionada com sucesso");
         
         //DB::insert('INSERT INTO series (nome) values (?)', [$nomeSerie]);
         //return redirect('/series');
-        return redirect()->route('series.index');
+        return redirect()->route('series.index')
+                ->with('mensagem.sucesso', "Série '{$serie->nome}' adicionada com sucesso");
         //return to_route('series.index');
     }
 
-    public function destroy(Serie $series, Request $request)
+    public function destroy(Serie $series)
     {
         $series->delete();
         //$series = Serie::find($request->series);
         //Serie::destroy($request->series);
 
-        $request->session()->flash('mensagem.sucesso', "Série '{$series->nome}' removida com sucesso");
-        return redirect()->route('series.index');
+        //$request->session()->flash();
+        return redirect()->route('series.index')
+                ->with('mensagem.sucesso', "Série '{$series->nome}' removida com sucesso");
     }
 }
