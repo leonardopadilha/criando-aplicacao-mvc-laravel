@@ -44,9 +44,9 @@ class SeriesController extends Controller
         $serie->nome = $nomeSerie;
         $serie->save(); */
 
-        Serie::create($request->all());
+        $serie = Serie::create($request->all());
         //session(['mensagem.sucesso' => 'Série adicionada com sucesso']);
-        $request->session()->flash('mensagem.sucesso', 'Série adicionada com sucesso');
+        $request->session()->flash('mensagem.sucesso', "Série '{$serie->nome}' adicionada com sucesso");
         
         //DB::insert('INSERT INTO series (nome) values (?)', [$nomeSerie]);
         //return redirect('/series');
@@ -54,10 +54,13 @@ class SeriesController extends Controller
         //return to_route('series.index');
     }
 
-    public function destroy(Request $request)
+    public function destroy(Serie $series, Request $request)
     {
-        Serie::destroy($request->series);
-        $request->session()->flash('mensagem.sucesso', 'Série removida com sucesso');
+        $series->delete();
+        //$series = Serie::find($request->series);
+        //Serie::destroy($request->series);
+
+        $request->session()->flash('mensagem.sucesso', "Série '{$series->nome}' removida com sucesso");
         return redirect()->route('series.index');
     }
 }
