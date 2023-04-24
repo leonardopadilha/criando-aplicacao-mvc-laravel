@@ -1,4 +1,4 @@
-<x-layout title="Nova Série">
+{{-- <x-layout title="Nova Série">
     <!-- <form action="/series/salvar" method="post"> -->
         <form action="{{ route('series.store') }}" method="post">
 
@@ -10,4 +10,8 @@
 
         <button type="submit" class="btn btn-primary">Adicionar</button>
     </form>
+</x-layout> --}}
+
+<x-layout title="Nova Série">
+    <x-series.form :action="route('series.store')" />
 </x-layout>
