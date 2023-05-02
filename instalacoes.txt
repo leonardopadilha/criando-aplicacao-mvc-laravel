@@ -12,3 +12,7 @@ php artisan make:migration create_series_table
 php artisan migrate
 
 php artisan make:model Serie
+php artisan make:model Season -m
+php artisan migrate:fresh
+
+composer require barryvdh/laravel-debugbar --dev
